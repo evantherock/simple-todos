@@ -1,3 +1,4 @@
+<!-- simple-todos.html -->
 <head>
   <title>Todo List</title>
 </head>
@@ -5,20 +6,7 @@
 <body>
   <div class="container">
     <header>
-      <h1>Todo List ({{incompleteCount}})</h1>
-
-      <label class="hide-completed">
-        <input type="checkbox" checked="{{hideCompleted}}" />
-        Hide Completed Tasks
-      </label>
-
-      {{> loginButtons}}
-
-      {{#if currentUser}}
-        <form class="new-task">
-          <input type="text" name="text" placeholder="Type to add new tasks" />
-        </form>
-      {{/if}}
+      <h1>Todo List</h1>
     </header>
 
     <ul>
@@ -30,21 +18,16 @@
 </body>
 
 <template name="task">
-  <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
-    <button class="delete">&times;</button>
-
-    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-
-    {{#if isOwner}}
-      <button class="toggle-private">
-        {{#if private}}
-          Private    
-        {{else}}
-          Public
-        {{/if}}
-      </button>
-    {{/if}}
-
-    <span class="text"><strong>{{username}}</strong> - {{text}}</span>
-  </li>
+  <li>{{text}}</li>
 </template>
+// simple-todos.js
+if (Meteor.isClient) {
+  // This code only runs on the client
+  Template.body.helpers({
+    tasks: [
+      { text: "This is task 1" },
+      { text: "This is task 2" },
+      { text: "This is task 3" }
+    ]
+  });
+}
